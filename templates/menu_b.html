@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Menú Principal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">¡Bienvenido, {{ nombre_usuario }}!</h1>
+            <p class="lead">Este es el menú principal de la aplicación.</p>
+            <hr class="my-4">
+            <p>¡Disfruta de tu experiencia!</p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">Realizar una acción</a>
+            <a class="btn btn-danger btn-lg ml-2" href="/logout" role="button">Cerrar Sesión</a>
+            <a class="btn btn-success btn-lg ml-2" href="/empleado" role="button">Agregar Empleado</a>
+            <ul class="nav">
+                <!-- ... Otros enlaces ... -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/nuevo_cliente">Nuevo Cliente</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</body>
+
+</html>

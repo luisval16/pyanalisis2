@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Menú Principal - Soundy & Becquer Tech</title>
+    <style>
+        /* Estilos adicionales aquí */
+        
+        .formulario-ventas {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .formulario-ventas form {
+            padding: 20px;
+        }
+        
+        .formulario-empleado {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .formulario-empleado form {
+            padding: 20px;
+        }
+        
+        .titulo {
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            padding-bottom: 20px;
+        }
+        
+        .caja {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        
+        .contenedor-cajas {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .contenedor-cajas .caja {
+            flex-basis: 48%;
+        }
+        
+        .btn-facturar {
+            background-color: orange;
+            color: white;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-registrar {
+            background-color: green;
+            color: white;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-registrar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .tabla-empleados {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .btn-facturar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .btn-borrar {
+            background-color: red;
+            color: white;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-borrar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .btn-eliminar {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .btn-editar {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .btn-editar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .btn-eliminar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .modal-content {
+            padding: 20px;
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        
+        .btn-lg {
+            font-size: 20px;
+            padding: 15px 30px;
+        }
+        
+        .btn-icon {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        
+        .btn-orange {
+            background-color: orange;
+            color: white;
+        }
+        
+        .box {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Menú principal -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Soundy & Becquer Tech</a>
+        <!-- Opciones del menú aquí -->
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" id="tab-1-tab" href="/menu" role="tab" aria-controls="tab-1" aria-selected="false">
+                    <i class="fas fa-home"></i> Principal
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">
+                    <i class="fas fa-shopping-cart"></i> Caja
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" id="tab-3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="true">
+                    <i class="fas fa-user"></i> Registrar empleado
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-4-tab" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">
+                    <i class="fas fa-user"></i> Registrar cliente
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-5-tab" data-toggle="tab" href="#tab-5" role="tab" aria-controls="tab-5" aria-selected="false">
+                    <i class="fas fa-truck"></i> Registrar proveedor
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-6-tab" data-toggle="tab" href="#tab-6" role="tab" aria-controls="tab-6" aria-selected="false">
+                    <i class="fas fa-desktop"></i> Registrar producto
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3" id="myTabContent">
+
+
+            <div class="tab-pane fade show active" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
+                <!-- Contenido de la pestaña "Registrar empleado" -->
+                <div class="container" style="padding-bottom: 60px;">
+                    <h1 class="titulo">Formulario de Registro de Empleado</h1>
+                    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+                    <div class="container mt-3">
+                        {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %} {% endwith %}
+                    <form method="POST">
+                        <div class="contenedor-cajas">
+                            <div class="caja">
+
+                                <input type="hidden" id="operacion" name="operacion" value="insertar">
+                                <!-- Agrega este campo oculto -->
+                                <input type="hidden" id="id_empleado" name="id_empleado">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cargo">Cargo:</label>
+                                    <select class="form-control" id="cargo" name="cargo" required>
+                          <option value="">Selecciona el cargo...</option>
+                          <option value="Gerente">Gerente</option>
+                          <option value="Supervisor">Supervisor</option>
+                          <option value="Asistente">Asistente</option>
+                          <option value="Operario">Operario</option>
+                        </select>
+                                    <div class="invalid-feedback">Por favor, selecciona el cargo del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dui">DUI:</label>
+                                    <input type="text" class="form-control" id="dui" name="dui">
+                                    <div class="invalid-feedback">Por favor, ingresa el DUI del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="salario">Salario:</label>
+                                    <input type="text" class="form-control" id="salario" name="salario" step="0.01">
+                                    <div class="invalid-feedback">Por favor, ingresa el salario del empleado.</div>
+                                </div>
+
+                                <button type="submit" class="btn btn-registrar" id="boton-guardar">Guardar</button>
+                                <button type="button" class="btn btn-borrar" id="boton-cancelar">Cancelar</button>
+
+                            </div>
+                            <div class="caja">
+
+                                <div class="form-group">
+                                    <label for="direccion">Dirección:</label>
+                                    <textarea class="form-control" id="direccion" name="direccion"></textarea>
+                                    <div class="invalid-feedback">Por favor, ingresa la dirección del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo">Correo:</label>
+                                    <input type="email" class="form-control" id="email" name="email">
+                                    <div class="invalid-feedback">Por favor, ingresa el correo del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="tel" class="form-control" id="telefono" name="telefono">
+                                    <div class="invalid-feedback">Por favor, ingresa el número de teléfono del empleado.</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                    <div class="caja tabla-empleados">
+                        <h2>Lista de Empleados</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Cargo</th>
+                                    <th>Salario</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
+                                    <th>DUI</th>
+                                    <th>Email</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for empleado in empleados %}
+                                <tr>
+                                    <td>{{ empleado.get_id_empleado() }}</td>
+                                    <td>{{ empleado.get_nombre() }}</td>
+                                    <td>{{ empleado.get_cargo() }}</td>
+                                    <td>{{ empleado.get_salario() }}</td>
+                                    <td>{{ empleado.get_direccion() }}</td>
+                                    <td>{{ empleado.get_telefono() }}</td>
+                                    <td>{{ empleado.get_dui() }}</td>
+                                    <td>{{ empleado.get_email() }}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" onclick="editarEmpleado('{{ empleado.get_id_empleado() }}', '{{ empleado.get_nombre() }}', '{{ empleado.get_cargo() }}', '{{ empleado.get_salario() }}', '{{ empleado.get_direccion() }}', '{{ empleado.get_telefono() }}', '{{ empleado.get_dui() }}', '{{ empleado.get_email() }}')">Editar</button>
+                                        <button class="btn btn-danger btn-sm">Desactivar</button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Soundy & Becquer Tech. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p>Desarrollado por OneBit Solutions</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        /*document.getElementById("boton-guardar").addEventListener("click", function() {
+                                                                                                                                                                                                                                    document.getElementById("operacion").value = "insertar";
+                                                                                                                                                                                                                                });*/
+
+        function editarEmpleado(id, nombre, cargo, salario, direccion, telefono, dui, email) {
+            document.getElementById("id_empleado").value = id;
+            document.getElementById("nombre").value = nombre;
+            document.getElementById("cargo").value = cargo;
+            document.getElementById("salario").value = salario;
+            document.getElementById("direccion").value = direccion;
+            document.getElementById("telefono").value = telefono;
+            document.getElementById("dui").value = dui;
+            document.getElementById("email").value = email;
+            document.getElementById("operacion").value = "actualizar";
+        }
+
+        document.getElementById("boton-cancelar").addEventListener("click", function() {
+            document.getElementById("id_empleado").value = "";
+            document.getElementById("nombre").value = "";
+            document.getElementById("cargo").value = "";
+            document.getElementById("salario").value = "";
+            document.getElementById("direccion").value = "";
+            document.getElementById("telefono").value = "";
+            document.getElementById("dui").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("operacion").value = "insertar";
+        });
+    </script>
+
+    <!-- Ventana modal de reportes -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Reportes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="startDatePicker">Fecha Inicio:</label>
+                        <input type="date" class="form-control" id="startDatePicker">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDatePicker">Fecha Final:</label>
+                        <input type="date" class="form-control" id="endDatePicker">
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-success btn-lg btn-block">Reporte de Ventas</button>
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-success btn-lg btn-block">Reporte de Compras</button>
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-success btn-lg btn-block">Planilla de Empleado</button>
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-orange btn-lg btn-block">
+              <i class="fas fa-print btn-icon"></i>
+              Imprimir Reporte o Planilla
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

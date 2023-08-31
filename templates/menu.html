@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Menú Principal - Soundy & Becquer Tech</title>
+    <style>
+        /* Estilos adicionales aquí */
+        
+        .formulario-ventas {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .formulario-ventas form {
+            padding: 20px;
+        }
+        
+        .formulario-empleado {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .formulario-empleado form {
+            padding: 20px;
+        }
+        
+        .titulo {
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            padding-bottom: 20px;
+        }
+        
+        .caja {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        
+        .contenedor-cajas {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .contenedor-cajas .caja {
+            flex-basis: 48%;
+        }
+        
+        .btn-facturar {
+            background-color: orange;
+            color: white;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-registrar {
+            background-color: green;
+            color: white;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-registrar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .tabla-empleados {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .btn-facturar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .btn-borrar {
+            background-color: red;
+            color: white;
+            width: 100%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .btn-borrar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .btn-eliminar {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .btn-editar {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .btn-editar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        .btn-eliminar:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .modal-content {
+            padding: 20px;
+        }
+        
+        .modal-title {
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            margin-top: 10px;
+            margin-right: 10px;
+        }
+        
+        .btn-lg {
+            font-size: 20px;
+            padding: 15px 30px;
+        }
+        
+        .btn-icon {
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        
+        .btn-orange {
+            background-color: orange;
+            color: white;
+        }
+        
+        .box {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Menú principal -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Soundy & Becquer Tech</a>
+        <!-- Opciones del menú aquí -->
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="tab-1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">
+                    <i class="fas fa-home"></i> Principal
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">
+                    <i class="fas fa-shopping-cart"></i> Caja
+                </a>
+            </li>
+            <li class="nav-item">
+
+                <a class="nav-link" href="/empleado" id="tab-3-tab" role="tab" aria-controls="tab-3" aria-selected="false">
+                    <i class="fas fa-user"></i> Registrar empleado
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-4-tab" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">
+                    <i class="fas fa-user"></i> Registrar cliente
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-5-tab" data-toggle="tab" href="#tab-5" role="tab" aria-controls="tab-5" aria-selected="false">
+                    <i class="fas fa-truck"></i> Registrar proveedor
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab-6-tab" data-toggle="tab" href="#tab-6" role="tab" aria-controls="tab-6" aria-selected="false">
+                    <i class="fas fa-desktop"></i> Registrar producto
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3" id="myTabContent">
+            <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="tab-1-tab">
+                <div class="text-center">
+                    <h3 class="mb-4">Bienvenid@, {{ nombre_usuario }}! </h3>
+                    <div class="mb-4">
+                        <img src="resources/ss.JPG" alt="Logo Empresa" class="img-fluid">
+                    </div>
+                    <h4 class="mb-4">Soundy & Becquer Tech</h4>
+                </div>
+                <div class="d-flex justify-content-between  mb-3 ml-3 mr-3">
+                    <button type="button" class="btn btn-secondary" id="reportes-btn" data-toggle="modal" data-target="#reportModal"><i class="fas fa-cog"></i> Reportes</button>
+
+                    <a href="/logout" role="button" class="btn btn-secondary" id="cerrar-sesion-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+
+                </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="tab-2-tab">
+                <!--Creacon de factura-->
+                <div class="container" style="padding-bottom: 60px;">
+                    <h1 class="titulo">Formulario de Ventas</h1>
+                    <h2 class="subtitulo">FACTURA N0001 - Fecha: <span id="fecha"></span></h2>
+                    <div class="contenedor-cajas">
+                        <div class="caja">
+                            <form class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <label for="cliente">Cliente:</label>
+                                    <input type="text" class="form-control" id="cliente" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del cliente.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre del Producto:</label>
+                                    <input type="text" class="form-control" id="nombre" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del producto.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="precio">Precio:</label>
+                                    <input type="number" class="form-control" id="precio" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el precio del producto.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cantidad">Cantidad:</label>
+                                    <input type="number" class="form-control" id="cantidad" required>
+                                    <div class="invalid-feedback">Por favor, ingresa la cantidad del producto.</div>
+                                </div>
+                                <button type="button" class="btn btn-primary" id="agregar">Agregar</button>
+                                <button type="button" class="btn btn-danger" id="borrar">Borrar</button>
+                            </form>
+                        </div>
+
+                        <div class="caja">
+                            <div class="table-responsive">
+                                <h2>Detalle de Venta</h2>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre del Producto</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Subtotal</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="detalle-venta">
+                                        <tr>
+                                            <td>Laptop</td>
+                                            <td>$1200</td>
+                                            <td>2</td>
+                                            <td>$2400</td>
+                                            <td><button class="btn btn-eliminar">Eliminar</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Monitor</td>
+                                            <td>$300</td>
+                                            <td>1</td>
+                                            <td>$300</td>
+                                            <td><button class="btn btn-eliminar">Eliminar</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Teclado</td>
+                                            <td>$50</td>
+                                            <td>3</td>
+                                            <td>$150</td>
+                                            <td><button class="btn btn-eliminar">Eliminar</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mouse</td>
+                                            <td>$20</td>
+                                            <td>5</td>
+                                            <td>$100</td>
+                                            <td><button class="btn btn-eliminar">Eliminar</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Impresora</td>
+                                            <td>$150</td>
+                                            <td>1</td>
+                                            <td>$150</td>
+                                            <td><button class="btn btn-eliminar">Eliminar</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h3>Total de la compra: $<span id="total">3300.00</span></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="caja">
+                        <button class="btn btn-facturar" id="facturar">Facturar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="tab-3-tab">
+                <!-- Contenido de la pestaña "Registrar empleado" -->
+                <div class="container" style="padding-bottom: 60px;">
+                    <h1 class="titulo">Formulario de Registro de Empleado</h1>
+                    <div class="contenedor-cajas">
+                        <div class="caja">
+                            <form class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el nombre del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellidos">Apellidos:</label>
+                                    <input type="text" class="form-control" id="apellidos" required>
+                                    <div class="invalid-feedback">Por favor, ingresa los apellidos del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cargo">Cargo:</label>
+                                    <select class="form-control" id="cargo" required>
+                          <option value="">Selecciona el cargo...</option>
+                          <option value="Gerente">Gerente</option>
+                          <option value="Supervisor">Supervisor</option>
+                          <option value="Asistente">Asistente</option>
+                          <option value="Operario">Operario</option>
+                        </select>
+                                    <div class="invalid-feedback">Por favor, selecciona el cargo del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dui">DUI:</label>
+                                    <input type="text" class="form-control" id="dui" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el DUI del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="salario">Salario:</label>
+                                    <input type="text" class="form-control" id="salario" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el salario del empleado.</div>
+                                </div>
+                                <button class="btn btn-registrar">Registrar</button>
+                                <button class="btn btn-borrar">Borrar</button>
+                            </form>
+                        </div>
+                        <div class="caja">
+                            <form class="needs-validation" novalidate>
+                                <div class="form-group">
+                                    <label for="direccion">Dirección:</label>
+                                    <textarea class="form-control" id="direccion" required></textarea>
+                                    <div class="invalid-feedback">Por favor, ingresa la dirección del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="correo">Correo:</label>
+                                    <input type="email" class="form-control" id="correo" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el correo del empleado.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input type="tel" class="form-control" id="telefono" required>
+                                    <div class="invalid-feedback">Por favor, ingresa el número de teléfono del empleado.</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="caja tabla-empleados">
+                        <h2>Lista de Empleados</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
+                                    <th>Cargo</th>
+                                    <th>DUI</th>
+                                    <th>Salario</th>
+                                    <th>Dirección</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Empleado 1</td>
+                                    <td>Apellido 1</td>
+                                    <td>Gerente</td>
+                                    <td>12345678-9</td>
+                                    <td>$2,500</td>
+                                    <td>Dirección 1</td>
+                                    <td>correo1@example.com</td>
+                                    <td>11111111</td>
+                                    <td>
+                                        <button class="btn btn-editar">Editar</button>
+                                        <button class="btn btn-borrar">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empleado 2</td>
+                                    <td>Apellido 2</td>
+                                    <td>Supervisor</td>
+                                    <td>98765432-1</td>
+                                    <td>$2,000</td>
+                                    <td>Dirección 2</td>
+                                    <td>correo2@example.com</td>
+                                    <td>22222222</td>
+                                    <td>
+                                        <button class="btn btn-editar">Editar</button>
+                                        <button class="btn btn-borrar">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empleado 3</td>
+                                    <td>Apellido 3</td>
+                                    <td>Asistente</td>
+                                    <td>87654321-0</td>
+                                    <td>$1,500</td>
+                                    <td>Dirección 3</td>
+                                    <td>correo3@example.com</td>
+                                    <td>33333333</td>
+                                    <td>
+                                        <button class="btn btn-editar">Editar</button>
+                                        <button class="btn btn-borrar">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empleado 4</td>
+                                    <td>Apellido 4</td>
+                                    <td>Operario</td>
+                                    <td>21098765-4</td>
+                                    <td>$1,200</td>
+                                    <td>Dirección 4</td>
+                                    <td>correo4@example.com</td>
+                                    <td>44444444</td>
+                                    <td>
+                                        <button class="btn btn-editar">Editar</button>
+                                        <button class="btn btn-borrar">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empleado 5</td>
+                                    <td>Apellido 5</td>
+                                    <td>Asistente</td>
+                                    <td>54321098-7</td>
+                                    <td>$1,800</td>
+                                    <td>Dirección 5</td>
+                                    <td>correo5@example.com</td>
+                                    <td>55555555</td>
+                                    <td>
+                                        <button class="btn btn-editar">Editar</button>
+                                        <button class="btn btn-borrar">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="tab-4-tab">
+                <!-- Contenido de la pestaña "Registrar cliente" -->
+                <div class="container" style="padding-bottom: 60px;">
+                    <div class="caja">
+                        <h2>Registro de Clientes</h2>
+                        <form class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="cliente">Nombre:</label>
+                                <input type="text" class="form-control" id="cliente" required>
+                                <div class="invalid-feedback">Por favor, ingresa el nombre del cliente.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dui">DUI:</label>
+                                <input type="text" class="form-control" id="dui" required>
+                                <div class="invalid-feedback">Por favor, ingresa el DUI del cliente.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <textarea class="form-control" id="direccion" required></textarea>
+                                <div class="invalid-feedback">Por favor, ingresa la dirección del cliente.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo">Correo:</label>
+                                <input type="email" class="form-control" id="correo" required>
+                                <div class="invalid-feedback">Por favor, ingresa el correo del cliente.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" class="form-control" id="telefono" required>
+                                <div class="invalid-feedback">Por favor, ingresa el número de teléfono del cliente.</div>
+                            </div>
+                            <button class="btn btn-primary">Registrar</button>
+                            <button class="btn btn-danger">Borrar</button>
+                        </form>
+                    </div>
+                    <div class="caja tabla-caja">
+                        <h2>Registro de Clientes</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>DUI</th>
+                                    <th>Dirección</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cliente 1</td>
+                                    <td>12345678-9</td>
+                                    <td>Dirección 1</td>
+                                    <td>correo1@example.com</td>
+                                    <td>11111111</td>
+                                    <td>
+                                        <button class="btn btn-primary
+            
+            ">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cliente 2</td>
+                                    <td>98765432-1</td>
+                                    <td>Dirección 2</td>
+                                    <td>correo2@example.com</td>
+                                    <td>22222222</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cliente 3</td>
+                                    <td>87654321-0</td>
+                                    <td>Dirección 3</td>
+                                    <td>correo3@example.com</td>
+                                    <td>33333333</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cliente 4</td>
+                                    <td>21098765-4</td>
+                                    <td>Dirección 4</td>
+                                    <td>correo4@example.com</td>
+                                    <td>44444444</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Cliente 5</td>
+                                    <td>54321098-7</td>
+                                    <td>Dirección 5</td>
+                                    <td>correo5@example.com</td>
+                                    <td>55555555</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="tab-5" role="tabpanel" aria-labelledby="tab-5-tab">
+                <!-- Contenido de la pestaña "Registrar proveedor" -->
+                <div class="container" style="padding-bottom: 60px;">
+                    <div class="caja">
+                        <h2>Registro de Proveedores</h2>
+                        <form class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="proveedor">Proveedor:</label>
+                                <input type="text" class="form-control" id="proveedor" required>
+                                <div class="invalid-feedback">Por favor, ingresa el nombre del proveedor.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nit">NIT:</label>
+                                <input type="text" class="form-control" id="nit" required>
+                                <div class="invalid-feedback">Por favor, ingresa el NIT del proveedor.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion">Dirección:</label>
+                                <textarea class="form-control" id="direccion" required></textarea>
+                                <div class="invalid-feedback">Por favor, ingresa la dirección del proveedor.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="correo">Correo:</label>
+                                <input type="email" class="form-control" id="correo" required>
+                                <div class="invalid-feedback">Por favor, ingresa el correo del proveedor.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono:</label>
+                                <input type="tel" class="form-control" id="telefono" required>
+                                <div class="invalid-feedback">Por favor, ingresa el número de teléfono del proveedor.</div>
+                            </div>
+                            <button class="btn btn-primary">Registrar</button>
+                            <button class="btn btn-danger">Borrar</button>
+                        </form>
+                    </div>
+                    <div class="caja tabla-caja">
+                        <h2>Registro de Proveedores</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Proveedor</th>
+                                    <th>NIT</th>
+                                    <th>Dirección</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Proveedor 1</td>
+                                    <td>12345678-9</td>
+                                    <td>Dirección 1</td>
+                                    <td>correo1@example.com</td>
+                                    <td>11111111</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Proveedor 2</td>
+                                    <td>98765432-1</td>
+                                    <td>Dirección 2</td>
+                                    <td>correo2@example.com</td>
+                                    <td>22222222</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Proveedor 3</td>
+                                    <td>87654321-0</td>
+                                    <td>Dirección 3</td>
+                                    <td>correo3@example.com</td>
+                                    <td>33333333</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Proveedor 4</td>
+                                    <td>21098765-4</td>
+                                    <td>Dirección 4</td>
+                                    <td>correo4@example.com</td>
+                                    <td>44444444</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Proveedor 5</td>
+                                    <td>54321098-7</td>
+                                    <td>Dirección 5</td>
+                                    <td>correo5@example.com</td>
+                                    <td>55555555</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="tab-6" role="tabpanel" aria-labelledby="tab-6-tab">
+                <!-- Contenido de la pestaña "Registrar producto" -->
+                <div class="container" style="padding-bottom: 60px;">
+                    <div class="caja">
+                        <h2>Registro de Productos</h2>
+                        <form class="needs-validation" novalidate>
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" required>
+                                <div class="invalid-feedback">Por favor, ingresa el nombre del producto.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcion">Descripción:</label>
+                                <textarea class="form-control" id="descripcion" required></textarea>
+                                <div class="invalid-feedback">Por favor, ingresa la descripción del producto.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="imagen">Imagen:</label>
+                                <input type="file" class="form-control-file" id="imagen" required>
+                                <div class="invalid-feedback">Por favor, sube una imagen del producto.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="precio-compra">Precio de Compra:</label>
+                                <input type="number" class="form-control" id="precio-compra" required>
+                                <div class="invalid-feedback">Por favor, ingresa el precio de compra del producto.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="precio-venta">Precio de Venta:</label>
+                                <input type="number" class="form-control" id="precio-venta" required>
+                                <div class="invalid-feedback">Por favor, ingresa el precio de venta del producto.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cantidad">Cantidad:</label>
+                                <input type="number" class="form-control" id="cantidad" required>
+                                <div class="invalid-feedback">Por favor, ingresa la cantidad del producto.</div>
+                            </div>
+                            <button class="btn btn-primary">Registrar</button>
+                            <button class="btn btn-danger">Borrar</button>
+                        </form>
+                    </div>
+                    <div class="caja tabla-caja">
+                        <h2>Registro de Productos</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Imagen</th>
+                                    <th>Precio de Compra</th>
+                                    <th>Precio de Venta</th>
+                                    <th>Cantidad</th>
+                                    <th>
+
+                                        Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Producto 1</td>
+                                    <td>Descripción del producto 1</td>
+                                    <td>Imagen 1</td>
+                                    <td>$10.00</td>
+                                    <td>$20.00</td>
+                                    <td>5</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Producto 2</td>
+                                    <td>Descripción del producto 2</td>
+                                    <td>Imagen 2</td>
+                                    <td>$15.00</td>
+                                    <td>$25.00</td>
+                                    <td>8</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Producto 3</td>
+                                    <td>Descripción del producto 3</td>
+                                    <td>Imagen 3</td>
+                                    <td>$12.00</td>
+                                    <td>$22.00</td>
+                                    <td>10</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Producto 4</td>
+                                    <td>Descripción del producto 4</td>
+                                    <td>Imagen 4</td>
+                                    <td>$18.00</td>
+                                    <td>$28.00</td>
+                                    <td>15</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Producto 5</td>
+                                    <td>Descripción del producto 5</td>
+                                    <td>Imagen 5</td>
+                                    <td>$14.00</td>
+                                    <td>$24.00</td>
+                                    <td>12</td>
+                                    <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                        <button class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; 2023 Soundy & Becquer Tech. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-right">
+                    <p>Desarrollado por OneBit Solutions</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!--<script>
+        $(document).ready(function() {
+            // Agregar evento al botón "Agregar"
+            $('#agregar').click(function() {
+                // Obtener los valores de los campos del formulario
+                var cliente = $('#cliente').val();
+                var nombre = $('#nombre').val();
+                var precio = $('#precio').val();
+                var cantidad = $('#cantidad').val();
+
+                // Crear una nueva fila en la tabla con el detalle de la venta
+                var subtotal = parseFloat(precio) * parseInt(cantidad);
+                var fila = '<tr>' +
+                    '<td>' + nombre + '</td>' +
+                    '<td>$' + precio + '</td>' +
+                    '<td>' + cantidad + '</td>' +
+                    '<td>$' + subtotal.toFixed(2) + '</td>' +
+                    '<td><button class="btn btn-eliminar">Eliminar</button></td>' +
+                    '</tr>';
+                $('#detalle-venta').append(fila);
+
+                // Limpiar los campos del formulario
+                $('#cliente').val('');
+                $('#nombre').val('');
+                $('#precio').val('');
+                $('#cantidad').val('');
+
+                // Calcular y actualizar el total de la compra
+                calcularTotal();
+            });
+
+            // Agregar evento a los botones "Eliminar"
+            $('#detalle-venta').on('click', '.btn-eliminar', function() {
+                // Eliminar la fila del registro seleccionado
+                $(this).closest('tr').remove();
+
+                // Calcular y actualizar el total de la compra
+                calcularTotal();
+            });
+
+            // Agregar evento al botón "Borrar"
+            $('#borrar').click(function() {
+                // Limpiar los campos del formulario
+                $('#cliente').val('');
+                $('#nombre').val('');
+                $('#precio').val('');
+                $('#cantidad').val('');
+            });
+
+            // Función para calcular y actualizar el total de la compra
+            function calcularTotal() {
+                var total = 0;
+                $('#detalle-venta tr').each(function() {
+                    var subtotal = parseFloat($(this).find('td:eq(3)').text().substring(1));
+                    total += subtotal;
+                });
+
+                // Actualizar el valor del total en el HTML
+                $('#total').text(total.toFixed(2));
+            }
+
+            // Agregar evento al botón "Facturar"
+            $('#facturar').click(function() {
+                // Imprimir la factura de venta
+                window.print();
+            });
+
+            // Obtener la fecha actual y mostrarla en el campo correspondiente
+            var fechaActual = new Date().toLocaleDateString();
+            $('#fecha').text(fechaActual);
+        });
+    </script>-->
+
+    <!-- Ventana modal de reportes -->
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Reportes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="startDatePicker">Fecha Inicio:</label>
+                        <input type="date" class="form-control" id="startDatePicker">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDatePicker">Fecha Final:</label>
+                        <input type="date" class="form-control" id="endDatePicker">
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-success btn-lg btn-block">Reporte de Ventas</button>
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-success btn-lg btn-block">Reporte de Compras</button>
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-success btn-lg btn-block">Planilla de Empleado</button>
+                    </div>
+                    <div class="box">
+                        <button class="btn btn-orange btn-lg btn-block">
+              <i class="fas fa-print btn-icon"></i>
+              Imprimir Reporte o Planilla
+            </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

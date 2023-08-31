@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Nuevo Cliente</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Formulario Cliente</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+        <div class="container mt-3">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %} {% endwith %}
+        <form method="POST">
+            <input type="hidden" id="operacion" name="operacion" value="insertar">
+
+            <input type="hidden" id="id_cliente" name="id_cliente">
+
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" class="form-control" id="direccion" name="direccion">
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="text" class="form-control" id="telefono" name="telefono">
+            </div>
+            <div class="form-group">
+                <label for="dui">DUI:</label>
+                <input type="text" class="form-control" id="dui" name="dui">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <button type="submit" class="btn btn-primary" id="boton-guardar">Guardar</button>
+            <button type="button" class="btn btn-secondary" id="boton-cancelar">Cancelar</button>
+        </form>
+
+        <h2>Lista de Clientes</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>DUI</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.get_id_cliente() }}</td>
+                    <td>{{ cliente.get_nombre() }}</td>
+                    <td>{{ cliente.get_direccion() }}</td>
+                    <td>{{ cliente.get_telefono() }}</td>
+                    <td>{{ cliente.get_dui() }}</td>
+                    <td>{{ cliente.get_email() }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="editarCliente('{{ cliente.get_id_cliente() }}', '{{ cliente.get_nombre() }}', '{{ cliente.get_direccion() }}', '{{ cliente.get_telefono() }}', '{{ cliente.get_dui() }}', '{{ cliente.get_email() }}')">Editar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function editarCliente(id, nombre, direccion, telefono, dui, email) {
+            document.getElementById("id_cliente").value = id;
+            document.getElementById("nombre").value = nombre;
+            document.getElementById("direccion").value = direccion;
+            document.getElementById("telefono").value = telefono;
+            document.getElementById("dui").value = dui;
+            document.getElementById("email").value = email;
+            document.getElementById("operacion").value = "actualizar";
+        }
+
+        document.getElementById("boton-cancelar").addEventListener("click", function() {
+            document.getElementById("id_cliente").value = "";
+            document.getElementById("nombre").value = "";
+            document.getElementById("direccion").value = "";
+            document.getElementById("telefono").value = "";
+            document.getElementById("dui").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("operacion").value = "insertar";
+        });
+    </script>
+</body>
+
+</html>
